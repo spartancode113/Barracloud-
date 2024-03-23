@@ -1,0 +1,235 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="en">
+<head>
+	<title>Barracloud</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="../assets/css/main.css" />
+	<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+<!-- Wrapper -->
+<div id="wrapper">
+
+	<!-- Header -->
+	<header id="header">
+		<div class="inner">
+
+			<!-- Logo here -->
+			<a href="../index.html" class="logo">
+				<span class="symbol"><img src="../images/logo.svg" alt="" /></span><span class="title">STEPHEN BARRACLOUGH</span>
+			</a>
+
+		</div>
+	</header>
+
+
+	<!-- Main -->
+	<div id="main">
+		<div class="inner">
+			<header>
+				<h1>Ubuntu with VPN<br /></h1>
+				<p>Using Crontab and shell to connect VPN automatically </p>
+			</header>
+					<p><ul>
+						<u><b>Lessons Learned</b></u>
+						<li>Setup of Linux on Type 1 Hypervisor</li>
+						<li>CLI installation of applications (Surfshark VPN)</li>
+						<li>Understanding of the Crontab</li>
+						<li>Basic Shell execution</li>
+					</ul>
+					</p>
+			<p style="text-align:justify"><b><u>Overview</u></b></br>
+				With my new ESXi home lab built it was time to deploy some virtual machines, for this I landed on ubuntu 20.04 LTS as my distro of choice,
+				with updates ongoing until 2025, a solid Debian base, and large user community that could be incredibly helpful if any problems arose, I
+				felt it was a solid selection. As I already owned a subscription to the surfshark vpn I also wanted to get this up and running to experiment
+				with the new Wireshark and the IKEv2 protocols. </p>
+
+			<p style="text-align:justify"><b><u>Setting Up the Virtual Machine</u></b></br>
+				Before setting up the virtual machine there were 3 things that I first needed to do, download the iso file, check the system requirements, and move
+				that iso over to a datastore on the ESXi server. Once the ISO file had been uploaded to my designated ISO folder on my datastore it was now
+				time to set up the virtual machine itself. Selecting the Virtual machine option from the left-hand side navigation options, selecting the
+				appropriate Linux settings, the datastore of where that virtual machine would reside, and providing a specification that met the minimum
+				or recommended requirements to run, as well as a cd rom drive with the ISO file selected, so i could use it as a boot option.<br><br>
+				Once the virtual machine was started, it loaded the ISO ubuntu image, which presented the options to try or install, I followed through
+				with the installation of the operating system keeping the settings left at the default options for a quick and reliable install.
+			<ul>
+				<b>Ubuntu 20.04 LTS Requirements </b>
+				<li>2 GHz dual core processor or better</li>
+				<li>4 GB system memory</li>
+				<li>25 GB of free hard drive space</li>
+				<li>Internet access is helpful</li>
+				<li>Either a DVD drive or a USB port for the installer media</li>
+			</ul>
+				<img src="/images/upload.jpg" alt=""
+					 width="100%"
+					 height="auto" />
+				<img src="/images/u0.jpg" alt=""
+					 width="100%"
+					 height="auto" />
+				<img src="/images/u1.jpg" alt=""
+					 width="100%"
+					 height="auto" />
+				<img src="/images/u2.jpg" alt=""
+					 width="100%"
+					 height="auto" />
+				<img src="/images/u3.jpg" alt=""
+					 width="100%"
+					 height="auto" />
+				<img src="/images/u4.jpg" alt=""
+					 width="100%"
+					 height="auto" />
+				<img src="/images/u5.png" alt=""
+					 width="100%"
+					 height="auto" />
+			</br></br></br>
+			</p>
+
+			<p style="text-align:justify"><b><u>Installation Of Surfshark</u></b></br>
+			In order to install surfshark vpn, I first had to use the shell to download and then install the package file, once the package was installed the
+			package lists need to be updated in order to install the surfshark software and lastly the software needs to be installed, this was achieved with the commands
+			below</br></br></p>
+
+			<p>
+			<code> sudo wget https://ocean.surfshark.com/debian/ pool/main/s/ surfshark-release/surfshark-release_1.0.0-2_amd64.deb</code></br></br>
+			<code> sudo dpkg -I surfshark-release_1.0.0-2_amd64.deb</code></br></br>
+			<code> sudo apt-get update</code></br></br>
+			<code> sudo apt-get install surfshark-vpn</code></br></br>
+
+			<b><u>Setup</u></b></br>
+			In order to set up the surfshark vpn i had to log in with my credentials, select a location to connect to, and await a conformation of that connection. I used the following command to initiate that</br></br>
+			<code>sudo surfshark-vpn</code></br></br>
+			<img src="/images/creds.png" alt=""
+				 width="100%"
+				 height="auto" /></br></br>
+				<code>88 + enter key (this would select the USA detroit server)</code></br></br>
+			<img src="/images/list.jpg" alt=""
+				 width="100%"
+				 height="auto" />
+
+			</br>
+
+			</p>
+			<p style="text-align:justify"><b><u>Custom Dns</u></b></br>
+			Although surfshark will state it has connected,i did not have any connectivity and no webpages would open, this is a known and documented issue that they plan to address in
+			future updates, in order to connect using Linux you must provide a custom DNS so that the connections to their servers will authenticate properly. In order to do this i had to
+			first clear the resolv.config file, bring it into an editor as a new resolv.conf, add in the nameservers that surfshark require to work, change the file attributes and restart ubuntu.
+
+			</br></br>The following commads were used to achieve this:</br>
+			<code>sudo rm -r /etc/resolv.conf</code></br></br>
+			<code>sudo nano /etc/resolv.conf</code></br></br>
+			<code>nameserver 208.67.222.222
+
+				nameserver 208.67.220.220
+
+			Crtl + X  (This was to save and exit the editor)</code></br></br>
+			<code>sudo chattr -f +i /etc/resolv.conf</code></br></br>
+			<code>sudo reboot</code></br></br>
+
+			Once a restart was completed we could again run the surfshark software from the shell and this time a successful connection will be made allowing us internet connectivity. <br><br>
+			<img src="/images/connection.jpg" alt=""
+				 width="100%"
+				 height="auto" />
+			</p>
+
+			<p style="text-align:justify"><b><u>Creating The script script</u></b></br>
+			So now that I have the ubuntu virtual machine up and running, surfshark installed, and the DNS settings customised in order to be able to connect, it was time for me to add the commands
+			needed into a shell script so i could launch surfshark and connect with only 1 command. To do this i used the following commands. </br></br>
+
+			First i opened up the nano editor and gave my script a tile of surfshark</br>
+			<code>sudo nano surfshark.sh</code></br></br>
+
+			Then i added the she-bang with the path to the shell that i want the script to use</br>
+			<code>#!/bin/bash</code></br></br>
+
+			Checking the surfshark command sets i found out that surfshark have a command that will connect to the fastest server with only 1 interaction rather than the 2 needed when selecting a location,
+			whilst it would take away my country of origin choice this would allow me to get the fastest server every time. The only requirement was the enter key was to be pressed, i accomplished this using
+			and echo command as seen below.</br>
+			<code>echo -e "/n" | sudo surfshark-vpn attack</code></br></br>
+
+			With the she-bang and command set in place it was time to save and exit the editor</br>
+			<code>crtl + x to exit . Y to confirm to save file</code></br></br>
+
+			Now i must make the script executable with the use of a change access command.</br>
+			<code>chmod +x surfshark.sh</code></br></br>
+
+			lastly all that had to be done was to test that the script was working. Before executing the script i took note of the current ip address by googling what's my ip, to show the one issued by my service provider.</br>
+
+				</br>I used the following command to execute my newly created script.</br>
+				<code>./surfshark.sh</code></br></br>
+
+			I also used the surfshark commands to check that the connection was valid as well as google to check the original ip address had changed, which it had. SUCCESS!!!!</br>
+</br>Please note the remainer of the IP address has been removed after the 185. </br></br>
+			<img src="/images/connect.jpg" alt=""
+				 width="100%"
+				 height="auto" />
+
+			</br></br>
+			</p>
+
+			<p style="text-align:justify"><b><u>Using Crontab to Run script at boot</u></b></br>
+			The last step of this whole venture is to implement that script at system boot, there is a few ways this could be accomplished but the way I decided to do it was to add an entry
+			into the crontab. By adding a record and indicating I wanted it to execute at system boot it should in theory run my surfshark script, and connect to the vpn without any user interaction. to fo this i done the following</br></br>
+
+			First i had to open the crontab in order to add a new job onto the list</br>
+			<code>crontab -e</code></br></br>
+			<img src="/images/cron.jpg" alt=""
+				 width="100%"
+				 height="auto" /></br></br>
+
+			Once the crontab is opened I need to add an entry into the crontab, so it knows when I want it to execute and where to execute from. I have also done the same thing under the sudo
+			crontab just encase I decide to log in as root rather than my user profile.</br>
+			<code>@reboot /home/stephen/surfshark.sh</code></br></br>
+
+			Now that the entry has been added I can reboot ubuntu and once the system has booted back up I can check the VPN connection status with the Google ip check and the surfshark-vpn status command. Success !!
+			The script worked after the reboot. Mission accomplished.</br></br>
+			</p>
+
+			<p style="text-align:justify"><b><u>Review and thoughts</u></b></br>
+			Linux wasn't even a thought when I initially purchased my VPN subscription, in future when it comes time for renewal I will definitely be looking into linux support in more detail to
+			make sure that I get the full feature sets, being able to use more than the one protocol for the connection, or an easy-to-use user UI. This has been a good learning experience and I have
+			been able to create and deploy basic shell scripts as well as schedule tasks within the crontab within virtual machine environment set up by myself. If i was to perform this task again in future
+			i would make a few changes. </br></br>
+
+			<ul>
+				<li>Choose a VPN provider with more customisable towards the linux platform</li>
+				<li>Add a status indicator within the script so the user did not have to manually check if it was successful</li>
+			</ul>
+			</p>
+
+		</div>
+	</div>
+
+	<!-- Footer -->
+	<footer id="footer">
+		<div class="inner">
+			<section>
+				<h2>Follow</h2>
+				<ul class="icons">
+					<li><a href="https://twitter.com/stebar0205" class="icon brands style2 fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="https://www.facebook.com/stephen.barraclough.923" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
+					<li><a href="https://www.instagram.com/stephen0205/?hl=en" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
+				</ul>
+			</section>
+			<ul class="copyright">
+				<li>&copy; Untitled. All rights reserved 2022</li><li>Design: <a href="http://html5up.net">HTML5 UP - Customised by Stephen Barraclough </a></li>
+			</ul>
+		</div>
+	</footer>
+
+</div>
+
+	<!-- Scripts -->
+	<script src="../assets/js/jquery.min.js"></script>
+	<script src="../assets/js/browser.min.js"></script>
+	<script src="../assets/js/breakpoints.min.js"></script>
+	<script src="../assets/js/util.js"></script>
+	<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>

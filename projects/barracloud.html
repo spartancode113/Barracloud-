@@ -1,0 +1,248 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="en">
+<head>
+    <title>Barracloud</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="../assets/css/main.css"/>
+    <noscript>
+        <link rel="stylesheet" href="../assets/css/noscript.css"/>
+    </noscript>
+</head>
+<body class="is-preload">
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Header -->
+    <header id="header">
+        <div class="inner">
+
+            <!-- Logo here -->
+            <a href="../index.html" class="logo">
+                <span class="symbol"><img src="../images/logo.svg" alt=""/></span><span class="title">STEPHEN BARRACLOUGH</span>
+            </a>
+
+        </div>
+    </header>
+
+
+    <!-- Main -->
+    <div id="main">
+        <div class="inner">
+            <header>
+                <h1>Building This Site<br/></h1>
+                <p>Buying my first domain</p>
+            </header>
+            <section class="tiles">
+                <p>
+                <ul>
+                    <b>Lessons Learned</b>
+                    <li>How to buy a domain</li>
+                    <li>How to use GitHub to host a website</li>
+                    <li>How to link domain and host with custom DNS</li>
+                    <li>Basic understanding of using GIT</li>
+                </ul>
+                </p>
+
+
+                <p style="text-align:justify"><b><u>Why Buy a Domain</u></b></br>
+                    Whilst I have completed the basic web development modules within university, I have never owned my
+                    own
+                    domain before, and as I begin my transition from student into the working world of computing I felt
+                    that
+                    it was best to get myself a website set up to act as an interactive portfolio, to show my education,
+                    my
+                    experiences and document my learnings from my projects.
+                </p>
+
+                <p style="text-align:justify"><b><u>Buying a domain</u></b></br>
+					<img src="/images/namecheap.png" alt=""
+						 width="100%"
+						 height="auto" />
+                    As advertised on almost any YouTube video I watched regarding the subject on buying a domain
+                    GoDaddy.com
+                    was amongst the most recommended website to buy one for a good price, upon looking at their
+                    offerings I
+                    found that depending on the plan, length of time I wanted the domain, and added extras they offer,
+                    the
+                    price can mount up quickly. It made me think about things that had not occurred to me, SSL certs,
+                    business email, hosting, all important things, after some searching, I came across a website called
+                    Namecheap, a highly recommended domain reseller that offered more affordable prices than
+                    GoDaddy.com. I
+                    settled on the name barracloud.com (a play on my surname and cloud computing) and proceeded to
+                    complete
+                    my purchase using PayPal.
+                </p>
+
+                <p style="text-align:justify"><b><u>Hosting</b></u></b></br>
+                    <img src="/images/githubpages.jpg" alt=""
+                         width="100%"
+                         height="auto" />
+                    Whilst Namecheap do offer hosting options and the creation of a website rather quickly with the
+                    likes of
+                    WordPress, I wanted to keep the costs down as low as possible, I also wanted a way to be able to be
+                    in
+                    control of the site if I wanted to make changes on the fly or work on them offline. GitHub now offer
+                    a
+                    service called pages, where you can host a website for free, whilst it has limitations such as no
+                    deployment previews or asset optimisations, I felt these wouldn’t be required, as I will be
+                    maintaining
+                    my website using my editor I will be in control of any deployments and in control of any assets the
+                    website will use.
+                </p>
+
+
+                <p style="text-align:justify"><b><u>Editor / Linking to Github</u></b></br>
+                    In order to create or maintain a website I needed an IDE, as a student I have used a few in the
+                    past, from notepad++, to Dreamweaver and WebStorm from JetBrains, as I’m most comfortable using the
+                    WebStorm IDE and it has support for GitHub version control linking I felt it was an appropriate
+                    choice. As I use other tools provided by JetBrains (pycharm, android studio) I went over to the
+                    JetBrains Toolbox, I selected WebStorm Community version to let it install and opened it to allow it
+                    to do any necessary updates before I linked my version control to it.</br></br>
+
+                    <img src="/images/isntall%20web.jpg" alt=""
+                         width="100%"
+                         height="auto" />
+                    </br></br>
+
+                    First, I had to create a repository in order to link it to WebStorm so that the data had
+                    somewhere to be stored, by logging into my GitHub account and clicking create new
+                    repository, I set it to private, as this is my personal website, I don’t want anyone other
+                    than myself having access to its content.</br></br>
+                    <img src="/images/create%20repo.jpg" alt=""
+                         width="100%"
+                         height="auto" /></br></br>
+                    Once the repository was created, I went back to WebStorm, selected new project from
+                    version control, and pasted the repository URL into the provided box and authenticated it
+                    with my GitHub log in details. With this now linked to my repository I could now start
+                    creating content and use the Git option to push and commit new content to the repo, I can
+                    also use it to fork the main branch if I wanted to work on pages and push them without
+                    effecting the main website.</br></br>
+                    <img src="/images/link%20with%20vc.jpg" alt=""
+                         width="100%"
+                         height="auto"/></br>
+                </p>
+
+				<p style="text-align:justify"><b><u>Linking to the Domain</u></b></br>
+                In order to link where my site is hosted to my domain host I first had to get the relevant DNS
+                details to link them together, checking out the Namecheap FAQ section I found a GitHub guide which
+                provided me the details to just that. By going to my dashboard and selecting the manage option on my
+                barracloud.com domain, it would take me to the settings page, to customise the DNS I had to select
+                the advanced option and add in 5records using the ip address ranges for GitHub, and lastly add in a
+                cname entry which will link directly to the GitHub repo just like my version control on webstorm
+                does.</br></br>
+
+                    <img src="/images/dnsdeets.png" alt=""
+                         width="100%"
+                         height="auto"/></br></br>
+
+
+                           Once added all I had to do was wait up to 24 hours for the details to verify the website
+                           and then head over to the GitHub pages settings section, within that there is an option
+                           to use a custom domain, to which I sued barracloud.com and then enabled the enforce HTTPS
+                           option to add a level of encryption to the site.
+                    </br></br>
+                    <img src="/images/customdomain.jpg" alt=""
+                         width="100%"
+                         height="auto"/>
+
+				</p>
+				<p style="text-align:justify"><b><u>Creating The site</u></b></br>
+                Although I know some basic html, CSS and JavaScript knowledge, I wanted to get a website up and
+                running fairly quickly, so I decided on the use of a free responsive template that I got from
+                HTMLup.net, they provide a large range of free templates, being responsive is optimal so that the
+                website loads and works properly on all screen resolutions and platforms, and I wanted something
+                that scaled well on mobile and pc.</br>
+                    <img src="/images/phantom.jpg" alt=""
+                         width="100%"
+                         height="auto"/></br>
+
+                        As you can see from the image above my website is based off the Phantom template, using
+                        WebStorm I imported the files to my project folders, I began to duplicate pages and
+                        customise them to show what you see on the screen in front of you, though basic html and the
+                        use of images on most pages, the website has a very minimalistic feel to it, with very low
+                        overhead and maintance required. By creating a generic page with a basic layout I can also
+                        use this for new pages as I add to my ongoing projects page.
+
+                    </br></br>
+                    <img src="/images/webstormcode.jpg" alt=""
+                         width="100%"
+                         height="auto"/></br>
+
+				</p>
+				<p style="text-align:justify"><b><u>Push to GitHub / Website goes live</u></b></br>
+                The last part was to use git to push the website to the GitHub repository, once I was happy with my
+                html and testing the website out using multiple browsers, I selected the green commit button in
+                WebStorm, added my notes for what I had done for my session, selected the commit and push button.
+                (Please ignore the errors and warnings, these are incorrectly used tags within paragraphs that will
+                be fixed in future revisions).
+                    </br></br>
+                    <img src="/images/commit.jpg" alt=""
+                         width="100%"
+                         height="auto"/></br></br>
+
+
+                    Once WebStorm confirms all the data has been successfully pushed to
+                the repository, I can head over to barrracloud.com, and vola. Website is live and running.
+                    </br></br>
+                    <img src="/images/barracloud-com.jpg" alt=""
+                         width="100%"
+                         height="auto"/></br></br>
+
+                <p style="text-align:justify"><b><u>Review</u></b></br>
+                Overall this was a fun project, having to go back and relearn how to do some basic html, and css customisations in order to optimise the website a little
+                better was certainly a challenge, in future there are a few things that i would like to tackle differently and i will defiendly be adding that to my projects list.
+
+                <ul>
+                <b>What id do differently</b>
+                    <li>Self Hosting. Try to host from my own server</li>
+                    <li>Research Content Management systems to lower html interaction time with new content</li>
+                    <li>If using own server try certbot free SSL certificates</li>
+                    <li>Possibly learn React for easier scaling</li>
+                </ul>
+
+                </p>
+
+
+				</p>
+            </section>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="inner">
+            <section>
+                <h2>Follow</h2>
+                <ul class="icons">
+                    <li><a href="https://twitter.com/stebar0205" class="icon brands style2 fa-twitter"><span
+                            class="label">Twitter</span></a></li>
+                    <li><a href="https://www.facebook.com/stephen.barraclough.923"
+                           class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
+                    <li><a href="https://www.instagram.com/stephen0205/?hl=en"
+                           class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
+                </ul>
+            </section>
+            <ul class="copyright">
+                <li>&copy; Untitled. All rights reserved 2022</li>
+                <li>Design: <a href="http://html5up.net">HTML5 UP - Customised by Stephen Barraclough </a></li>
+            </ul>
+        </div>
+    </footer>
+
+</div>
+
+<!-- Scripts -->
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/browser.min.js"></script>
+<script src="../assets/js/breakpoints.min.js"></script>
+<script src="../assets/js/util.js"></script>
+<script src="../assets/js/main.js"></script>
+
+</body>
+</html>
